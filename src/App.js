@@ -1,11 +1,12 @@
 import React from 'react'
 import Header from './components/Header'
+import MovieContainer from './components/MovieContainer'
 
 const App = () => {
   return (
     <div>
       <Header />
-      {/* <p>Hola mundo</p> */}
+      <MovieContainer />
     </div>
   )
 }
