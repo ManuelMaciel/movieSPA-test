@@ -57,7 +57,7 @@ const MovieDetails = () => {
                       <span className="badge badge-pill badge-warning">Rating: {review.calificacion}</span>
                       <span className='ml-2'>{review.usuario.first_name} {review.usuario.last_name}: </span>
                     </div>
-                    <blockquote class="blockquote mb-0">
+                    <blockquote className="blockquote mb-0">
                       <span className="d-flex align-items-end blockquote-footer">{review.mensaje}</span>
                     </blockquote>
                   </div>

@@ -1,21 +1,27 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { UserContext } from '../context/useContext';
 
 const Header = () => {
 
-  const { isLogged, setIsLogged } = useContext(UserContext);
+  const { isLogged, setIsLogged, setAccess, setRefresh } = useContext(UserContext);
+
+  const prevent = useRef(0)
 
   const logout = async () => {
-    await localStorage.clear()
     setIsLogged(false)
+    setAccess(null)
+    setRefresh(null)
+    await localStorage.clear()
     localStorage.getItem('access');
+    prevent.current += 1
   } 
 
   useEffect(() => {
+    if(prevent.current === 0) return;
     console.log('is logged change')
     console.log(isLogged)
-  }, [isLogged])
+  }, [isLogged, prevent.current])
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-primary justify-content-between">
       <div className="container">
