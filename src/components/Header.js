@@ -55,6 +55,9 @@ const Button = styled.a`
   font-weight: 700;
   font-size: 25px;
   float: right;
+  &:hover {
+    color: #fff;
+  }
 `;
 // colors
 // https://brandcolors.net/b/audi
