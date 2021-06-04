@@ -11,7 +11,6 @@ const MoviesContainer = () => {
     setData(resp.data)
   }
 
-
   useEffect(() => {
     getMovies()
   }, [])
