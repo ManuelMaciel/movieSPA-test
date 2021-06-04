@@ -8,9 +8,22 @@ const MovieDetails = () => {
 
   const [ movieData, setMovieData ] = useState([])
   
-  const { isLogged } = useContext(UserContext);
+  const { isLogged, loading, setLoading, access } = useContext(UserContext);
 
   let { id } = useParams();
+
+  const deleteComment = async (idComment) => {
+    const headers = {
+      'Authorization': `Bearer ${access}`,
+    }
+    try {
+      const resp = await AxiosClient.delete(`/api/comentario/${idComment}/`, { headers: headers })
+      setLoading(!loading)
+    } catch (error) {
+      console.error(error)
+    }
+    // console.log(idComment)
+  }
 
   const getMovieById = useCallback( async () => {
     // setMovieData([])
@@ -26,7 +39,7 @@ const MovieDetails = () => {
   })
   useEffect(() => {
     getMovieById()
-  }, [])
+  }, [loading])
 
   return (  
     <>
@@ -88,6 +101,7 @@ const MovieDetails = () => {
                       <span className="badge badge-pill badge-warning">Rating: {comment.calificacion}</span>
                       <span className='ml-2'>{comment.usuario.first_name} {comment.usuario.last_name}: </span>
                     </div>
+                    <button onClick={() => deleteComment(comment.id)} type="button" class="btn btn-danger btn-sm">Delete comment</button>
                     <blockquote className="blockquote mb-0">
                       <span className="d-flex align-items-end blockquote-footer">{comment.mensaje}</span>
                     </blockquote>

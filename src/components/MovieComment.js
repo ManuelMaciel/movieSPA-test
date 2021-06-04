@@ -11,7 +11,7 @@ const MovieComment = ({id}) => {
   const [ error, setError ] = useState(false)
   const [ errorMsg, setErrorMsg ] = useState("")
 
-  const { access, refresh } = useContext(UserContext);
+  const { access, refresh, loading, setLoading } = useContext(UserContext);
   
   const handleSubmitComment = (e) => {
     e.preventDefault();
@@ -44,6 +44,7 @@ const MovieComment = ({id}) => {
       console.log(resp)
       await setMessage("");
       await setRating(0);
+      setLoading(!loading)
     } catch (error) {
       console.error(error)
     }

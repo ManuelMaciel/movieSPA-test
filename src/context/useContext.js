@@ -1,4 +1,4 @@
-import { useState, useEffect, createContext } from "react";
+import { useState, useEffect, createContext, useRef } from "react";
 import AxiosClient from '../components/AxiosClient';
 
 export const UserContext = createContext();
@@ -40,7 +40,7 @@ export const UserProvider = ({children}) => {
 
   return (
     <UserContext.Provider 
-      value={{access, refresh, loading, isLogged, setAccess, setRefresh, setIsLogged}}
+      value={{access, refresh, loading, isLogged, setLoading, setAccess, setRefresh, setIsLogged}}
     >
         { children }
     </UserContext.Provider>
