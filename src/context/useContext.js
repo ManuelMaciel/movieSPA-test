@@ -6,7 +6,7 @@ export const UserContext = createContext();
 export const UserProvider = ({children}) => {
   const [access, setAccess ] = useState(localStorage.getItem("access") || null);
   const [refresh, setRefresh] = useState(localStorage.getItem("refresh") || null);
-  const [ isLogged, setIsLogged ] = useState(false)
+  const [isLogged, setIsLogged] = useState(false)
   const [loading, setLoading] = useState(false);
 
   const fetchUser = async () => {
@@ -14,9 +14,10 @@ export const UserProvider = ({children}) => {
     try {
       const resp = await AxiosClient.post("/api/token/verify/", {token: access });
       console.log(resp)
-      // console.log('i have access')
+      console.log('i have access')
+      setIsLogged(true)
     } catch(error) {
-      // console.log('i dont have access')
+      console.log('i dont have access')
       if(error.response.status === 401){
         const resp = await AxiosClient.post("/api/token/refresh/", {refresh: refresh });
         setAccess(resp.data.access)
@@ -39,7 +40,7 @@ export const UserProvider = ({children}) => {
 
   return (
     <UserContext.Provider 
-      value={{access, loading, isLogged, setAccess, setRefresh, setIsLogged}}
+      value={{access, refresh, loading, isLogged, setAccess, setRefresh, setIsLogged}}
     >
         { children }
     </UserContext.Provider>

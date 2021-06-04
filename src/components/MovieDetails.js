@@ -44,14 +44,14 @@ const MovieDetails = () => {
               </div>
             </div>
             <div className='card-footer'>
-              {movieData[0][1].data.length === 0
+              {movieData[0][2].data.length === 0
               ?
               <div className="d-flex flex-column-reverse bd-highlight">
                 <div className="p-2 bd-highlight border-bottom">No reviews</div>
               </div>
               :
               <div className="d-flex flex-column-reverse bd-highlight">
-                {movieData[0][1].data.map(review => (
+                {movieData[0][2].data.map(review => (
                   <div className="p-2 bd-highlight border-bottom">
                     <div className='mt-2 mb-2'>
                       <span className="badge badge-pill badge-warning">Rating: {review.calificacion}</span>
@@ -75,14 +75,14 @@ const MovieDetails = () => {
               </div>
             </div>
             <div className='card-footer'>
-              {movieData[0][2].data.length === 0 
+              {movieData[0][1].data.length === 0 
               ?
               <div className="d-flex flex-column-reverse bd-highlight">
                 <div className="p-2 bd-highlight border-bottom">No comments</div>
               </div>
               :
               <div className="d-flex flex-column-reverse bd-highlight">
-                {movieData[0][2].data.map(comment => (
+                {movieData[0][1].data.map(comment => (
                   <div className="p-2 bd-highlight border-bottom">
                     <div className='mt-2 mb-2'>
                       <span className="badge badge-pill badge-warning">Rating: {comment.calificacion}</span>
@@ -97,7 +97,7 @@ const MovieDetails = () => {
               }
               {isLogged
               ?
-                <MovieComment />
+                <MovieComment id={id} />
               :
               <div className="form-group d-flex justify-content-center mt-5">
                 <h3><span className="badge badge-pill badge-danger">to comment you need to be logged in</span></h3>
