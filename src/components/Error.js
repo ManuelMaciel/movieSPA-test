@@ -1,5 +1,5 @@
-import React from 'react';
-import styled from '@emotion/styled';
+import React from "react";
+import styled from "@emotion/styled";
 
 //styled components
 const ErrorMessage = styled.p`
@@ -10,13 +10,11 @@ const ErrorMessage = styled.p`
   text-transform: uppercase;
   font-weight: bold;
   text-align: center;
-  font-family: 'Bebas Neue', cursive;
+  font-family: "Bebas Neue", cursive;
 `;
 
-const Error = ({message}) => {
-  return (  
-    <ErrorMessage>{message}</ErrorMessage>
-  );
-}
+const Error = ({ message }) => {
+  return <ErrorMessage>{message}</ErrorMessage>;
+};
 
 export default Error;
