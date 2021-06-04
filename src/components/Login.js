@@ -12,7 +12,7 @@ const Login = ({history}) => {
   const [ error, setError ] = useState(false)
   const [ errorMsg, setErrorMsg ] = useState("")
 
-  const { setRefresh, setAccess } = useContext(UserContext);
+  const { setRefresh, setAccess, setIsLogged } = useContext(UserContext);
 
   const login = async () => {
     try {
@@ -21,6 +21,7 @@ const Login = ({history}) => {
       localStorage.setItem("access", verify.data.access);
       setRefresh(verify.data.refresh)
       setAccess(verify.data.access)
+      setIsLogged(true)
       history.push("/");
     } catch (error) {
       console.log(error)
@@ -28,7 +29,7 @@ const Login = ({history}) => {
       setError(true);
     }
   }
-  
+
   const handleSubmit = (e) => {
     e.preventDefault();
     // validate form
