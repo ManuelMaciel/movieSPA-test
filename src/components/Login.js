@@ -1,8 +1,10 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import Error from './Error'
 import AxiosClient from './AxiosClient';
+import { UserContext } from '../context/useContext'
+import { withRouter } from 'react-router-dom';
 
-const Login = () => {
+const Login = ({history}) => {
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -10,12 +12,20 @@ const Login = () => {
   const [ error, setError ] = useState(false)
   const [ errorMsg, setErrorMsg ] = useState("")
 
+  const { setRefresh, setAccess } = useContext(UserContext);
+
   const login = async () => {
     try {
       const verify = await AxiosClient.post('/api/token/', {username, password})
-      console.log(verify)
+      console.log(verify.data)
+      localStorage.setItem("refresh", verify.data.refresh);
+      localStorage.setItem("access", verify.data.access);
+      setRefresh(verify.data.refresh)
+      setAccess(verify.data.access)
+      history.push("/");
+      console.log('done')
     } catch (error) {
-      console.log(error.response.status)
+      console.log(error)
       setErrorMsg(error.response.data.detail)
       setError(true);
     }
