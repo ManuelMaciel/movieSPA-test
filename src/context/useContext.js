@@ -10,21 +10,26 @@ export const UserProvider = ({children}) => {
 
   const fetchUser = async () => {
     try {
-        const resp = await AxiosClient.post("/api/token/verify/", {token: access });
-        console.log(resp)
+      const resp = await AxiosClient.post("/api/token/verify/", {token: access });
+      console.log(resp)
+      console.log('i have access')
     } catch(error) {
-        console.log(error);
+      console.log('i dont have access')
+      if(error.response.status === 401){
+        const resp = await AxiosClient.post("/api/token/refresh/", {refresh: refresh });
+        setAccess(resp.data.access)
+      };
     }
   }
   
   useEffect(() => {
-      // if(access !== null) {
-        // fetchUser()
-        console.log(`access: ${access}`)
-        console.log(`refresh: ${refresh}`)
-      // }
+      if(access !== null) {
+        fetchUser()
+      }
+      console.log(`access: ${access}`)
+      console.log(`refresh: ${refresh}`)
       // console.log('no hay nada')
-  }, [loading]);
+  }, [access, refresh]);
 
   return (
     <UserContext.Provider 
